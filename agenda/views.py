@@ -35,7 +35,7 @@ def listar_agendamento(request):
     if request.method == "GET":
         agendamentos = Agendamento.objects.all()
         serializer = AgendamentoSerializer(agendamentos, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == "POST":
         serializer = AgendamentoSerializer(data=request.data)
         if serializer.is_valid():

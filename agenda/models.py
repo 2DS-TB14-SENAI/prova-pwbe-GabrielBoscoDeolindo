@@ -16,4 +16,4 @@ class Agendamento(models.Model):
     cliente_email = models.EmailField()
 
     def __str__(self):
-        return self.servico
+        return self.cliente_nome
