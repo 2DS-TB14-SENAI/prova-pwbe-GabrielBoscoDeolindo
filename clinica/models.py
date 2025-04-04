@@ -1,6 +1,6 @@
 from django.db import models
 
-CONSULTA_CHOICES = [
+ESPECIALIDADE_CHOICES = [
     ("CAR", "Cardiologista"),
     ("ORT", "Ortopedista")
 ]
@@ -14,7 +14,7 @@ STATUS_CHOICES = [
 # Create your models here.
 class Medico(models.Model):
     nome = models.CharField(max_length=50)
-    consulta = models.CharField(choices=CONSULTA_CHOICES, max_length=50)
+    especialidade = models.CharField(choices=ESPECIALIDADE_CHOICES, max_length=50)
     crm = models.IntegerField(unique=True)
     email = models.EmailField(null=True, blank=True)
 
