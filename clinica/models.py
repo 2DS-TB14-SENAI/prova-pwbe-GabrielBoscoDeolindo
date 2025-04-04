@@ -1,7 +1,8 @@
 from django.db import models
 
 CONSULTA_CHOICES = [
-    ("CAR", "Cardiologista")
+    ("CAR", "Cardiologista"),
+    ("ORT", "Ortopedista")
 ]
 
 STATUS_CHOICES = [
@@ -12,8 +13,8 @@ STATUS_CHOICES = [
 
 # Create your models here.
 class Medico(models.Model):
-    nome = models.CharField()
-    consulta = models.CharField(choices=CONSULTA_CHOICES)
+    nome = models.CharField(max_length=50)
+    consulta = models.CharField(choices=CONSULTA_CHOICES, max_length=50)
     crm = models.IntegerField(unique=True)
     email = models.EmailField(null=True, blank=True)
 
@@ -21,10 +22,10 @@ class Medico(models.Model):
         return self.nome
 
 class Consulta(models.Model):
-    paciente = models.CharField()
+    paciente = models.CharField(max_length=50)
     data = models.DateTimeField()
-    medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
-    status = models.CharField(choices=STATUS_CHOICES)
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE, related_name='+')
+    status = models.CharField(choices=STATUS_CHOICES, max_length=50)
 
     def __str__(self):
         return self.paciente
