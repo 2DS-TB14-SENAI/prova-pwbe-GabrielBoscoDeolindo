@@ -15,7 +15,6 @@ def create_user(request):
     phone = request.data.get('phone')
     address = request.data.get('address')
     birth_date = request.data.get('birth_date')
-    is_verified = request.data.get('is_verified')
     
     if not username or not password or not phone:
         return Response({'erro': 'Informações insuficientes'}, status=status.HTTP_400_BAD_REQUEST)
@@ -29,7 +28,6 @@ def create_user(request):
         phone=phone,
         address=address,
         birth_date=birth_date,
-        is_verified=is_verified
     )
     return Response({"Mensagem": f"usuario {username} criado com sucesso"}, status=status.HTTP_201_CREATED)
 
