@@ -9,4 +9,4 @@ class CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.phone
+        return self.username
