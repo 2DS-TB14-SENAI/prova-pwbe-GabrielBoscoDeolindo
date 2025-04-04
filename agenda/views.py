@@ -6,11 +6,18 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 # Create your views here.
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def listar_servicos(request):
-    servicos = Servico.objects.all()
-    serializer = ServicoSerializer(servicos, many=True)
-    return Response(serializer.data)
+    if request.method == "GET":
+        servicos = Servico.objects.all()
+        serializer = ServicoSerializer(servicos, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = ServicoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def servico_especifico(request, pk):
@@ -22,20 +29,19 @@ def servico_especifico(request, pk):
     serializer = ServicoSerializer(servicos)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@api_view(['POST'])
-def criar_servico(request):
-    serializer = ServicoSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def listar_agendamento(request):
-    agendamento = Agendamento.objects.all()
-    serializer = AgendamentoSerializer(agendamento, many=True)
-    return Response(serializer.data)
+    if request.method == "GET":
+        agendamentos = Agendamento.objects.all()
+        serializer = AgendamentoSerializer(agendamentos, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = AgendamentoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def agendamento_especifico(request, pk):
@@ -47,10 +53,3 @@ def agendamento_especifico(request, pk):
     serializer = AgendamentoSerializer(agendamentos)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@api_view(['POST'])
-def criar_agendamento(request):
-    serializer = AgendamentoSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
