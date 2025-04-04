@@ -6,6 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    aaaaaa
+    {% for medico in medicos %}
+    <ul>
+      <li>{{ medico.nome }}</li>
+      <li>{{ medico.especialidade }}</li>
+      <li>{{ medico.crm }}</li>
+      <li>{{ medico.email }}</li>
+    </ul>
+    <hr />
+    {% endfor %}
 </body>
 </html>
