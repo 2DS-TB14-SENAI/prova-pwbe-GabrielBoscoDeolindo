@@ -15,8 +15,9 @@ def create_user(request):
     phone = request.data.get('phone')
     address = request.data.get('address')
     birth_date = request.data.get('birth_date')
+    is_verified = request.data.get('is_verified')
     
-    if not username or not password or not phone:
+    if not username or not password or not phone or not address or not birth_date:
         return Response({'erro': 'Informações insuficientes'}, status=status.HTTP_400_BAD_REQUEST)
     
     if CustomUser.objects.filter(username = username).exists():
