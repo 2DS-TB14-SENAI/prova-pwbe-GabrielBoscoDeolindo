@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 ESPECIALIDADE_CHOICES = [
     ("CAR", "Cardiologista"),
@@ -15,7 +16,7 @@ STATUS_CHOICES = [
 class Medico(models.Model):
     nome = models.CharField(max_length=50)
     especialidade = models.CharField(choices=ESPECIALIDADE_CHOICES, max_length=50)
-    crm = models.CharField(unique=True, max_length=50)
+    crm = models.CharField(unique=True, max_length=8, validators=[MinLengthValidator(8)])
     email = models.EmailField(null=True, blank=True)
 
     def __str__(self):
