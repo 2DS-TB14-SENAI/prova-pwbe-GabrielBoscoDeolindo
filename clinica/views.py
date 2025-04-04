@@ -12,13 +12,13 @@ def listar_medicos(request):
         serializer = MedicoSerializer(medicos, many=True)
         return render(request, 'listar_medicos.html', {'medicos': medicos})
 
-@api_view(["POST"])
-def criar_consulta(request):
-        serializer = MedicoSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(["POST"])
+# def criar_consulta(request):
+#         serializer = MedicoSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # @api_view(["GET"])
 # def detalhes_consulta(request):
