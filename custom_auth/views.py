@@ -48,3 +48,9 @@ def login(request):
     else:
         return Response({"Erro": "usuário ou senha invalidos"}, status=status.HTTP_401_UNAUTHORIZED)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def profile(request):
+    return Response({"perfil": "nomeablueblue"}, status=status.HTTP_200_OK)
+    
+
