@@ -38,7 +38,7 @@ def login(request):
     password = request.data.get('password')
     phone = request.data.get('phone')
 
-    usuario = authenticate(username=username, password=password)
+    usuario = authenticate(username=username, password=password, phone=phone)
 
     if usuario:
         refresh = RefreshToken.for_user(usuario)
